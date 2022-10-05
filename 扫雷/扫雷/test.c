@@ -9,27 +9,17 @@ void menu()
 	printf("#######  0.exit  #######\n");
 	printf("########################\n");
 }
-Disboard2(int inside[ROW][COL], int row, int col)
-{
-	int a = 0;
-	int b = 0;
-	for (a=0;a<row;a++)
-	{
-		for (b=0;b<col;b++)
-		{
-			printf("%d  ", inside[a][b]);
-		}
-		printf("\n");
-	}
-}
+//侧试里棋盘的函数
 void game()
 {
-	int inside[ROW + 2][COL + 2] = { 0 };//里层雷区
- 	char outside[ROW][COL] = { 0 };//表层雷区
-	Lniche(outside,ROW,COL);//初始化表雷区
+	char inside[ROWS][COLS] = { 0 };//里层雷区
+ 	char outside[ROWS][COLS] = { 0 };//表层雷区
+	Lniche(outside,ROWS,COLS,'*');//初始化表雷区
+	Lniche(inside, ROWS, COLS,'0');//初始化里雷区
 	Disboard(outside, ROW, COL);//打印表雷区
 	Putboard(inside, ROW, COL);//布置里雷区
-	Disboard2(inside, ROW + 2, COL + 2);
+	//Disboard2(inside, ROWS, COLS);//侧试里棋盘
+	Process(inside, outside);//游戏过程
 }
 void test()
 {
@@ -37,6 +27,7 @@ void test()
 	do
 	{
 		menu();
+
 		printf("请选择：");
 		scanf("%d", &input);
 		switch (input)
